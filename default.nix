@@ -130,7 +130,7 @@ let
       # tree is a valid git repository.
       tryFetchGit =
         src:
-        if isGit && !isShallow then
+        if isGit then
           let
             res = builtins.fetchGit src;
           in
@@ -160,7 +160,6 @@ let
           };
       # NB git worktrees have a file for .git, so we don't check the type of .git
       isGit = builtins.pathExists (src + "/.git");
-      isShallow = builtins.pathExists (src + "/.git/shallow");
 
     in
     {
